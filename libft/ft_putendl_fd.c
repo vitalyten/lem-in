@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vtenigin <vtenigin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/13 17:07:00 by vtenigin          #+#    #+#             */
-/*   Updated: 2017/01/13 20:34:22 by vtenigin         ###   ########.fr       */
+/*   Created: 2016/09/27 15:42:04 by vtenigin          #+#    #+#             */
+/*   Updated: 2016/09/27 15:43:15 by vtenigin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem_in.h"
+#include "libft.h"
 
-void		showerr(void)
+void	ft_putendl_fd(char const *s, int fd)
 {
-	write(2, "ERROR\n", 6);
-	exit(-1);
+	ft_putstr_fd(s, fd);
+	ft_putchar_fd('\n', fd);
 }

@@ -1,19 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vtenigin <vtenigin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/13 17:07:00 by vtenigin          #+#    #+#             */
-/*   Updated: 2017/01/13 20:34:22 by vtenigin         ###   ########.fr       */
+/*   Created: 2016/09/22 22:27:26 by vtenigin          #+#    #+#             */
+/*   Updated: 2016/09/26 18:05:25 by vtenigin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem_in.h"
+#include "libft.h"
 
-void		showerr(void)
+char	*ft_strchr(const char *s, int c)
 {
-	write(2, "ERROR\n", 6);
-	exit(-1);
+	char *str;
+
+	str = (char *)s;
+	while (*str != (char)c && *str != '\0')
+		str++;
+	return (*str == (char)c ? (char *)str : NULL);
 }

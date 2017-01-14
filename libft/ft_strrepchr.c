@@ -1,19 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strrepchr.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vtenigin <vtenigin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/13 17:07:00 by vtenigin          #+#    #+#             */
-/*   Updated: 2017/01/13 20:34:22 by vtenigin         ###   ########.fr       */
+/*   Created: 2016/10/01 18:51:04 by vtenigin          #+#    #+#             */
+/*   Updated: 2016/10/01 20:06:04 by vtenigin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem_in.h"
+#include "libft.h"
 
-void		showerr(void)
+char	*ft_strrepchr(char *str, char c, char r)
 {
-	write(2, "ERROR\n", 6);
-	exit(-1);
+	char	*tmp;
+
+	tmp = str;
+	while (*str)
+	{
+		if (*str == c)
+			*str = r;
+		str++;
+	}
+	return (tmp);
 }

@@ -1,19 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strtolower.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vtenigin <vtenigin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/13 17:07:00 by vtenigin          #+#    #+#             */
-/*   Updated: 2017/01/13 20:34:22 by vtenigin         ###   ########.fr       */
+/*   Created: 2016/10/01 19:21:04 by vtenigin          #+#    #+#             */
+/*   Updated: 2016/10/01 19:57:59 by vtenigin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem_in.h"
+#include "libft.h"
 
-void		showerr(void)
+char	*ft_strtolower(char *str)
 {
-	write(2, "ERROR\n", 6);
-	exit(-1);
+	char *tmp;
+
+	tmp = str;
+	while (*str)
+	{
+		*str = ft_tolower(*str);
+		str++;
+	}
+	return (tmp);
 }

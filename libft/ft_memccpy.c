@@ -1,19 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memccpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vtenigin <vtenigin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/13 17:07:00 by vtenigin          #+#    #+#             */
-/*   Updated: 2017/01/13 20:34:22 by vtenigin         ###   ########.fr       */
+/*   Created: 2016/09/24 14:29:56 by vtenigin          #+#    #+#             */
+/*   Updated: 2016/09/26 17:56:28 by vtenigin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem_in.h"
+#include "libft.h"
 
-void		showerr(void)
+void	*ft_memccpy(void *dst, const void *src, int c, size_t n)
 {
-	write(2, "ERROR\n", 6);
-	exit(-1);
+	size_t	i;
+	char	*tdst;
+	char	*tsrc;
+
+	tdst = (char *)dst;
+	tsrc = (char *)src;
+	i = 0;
+	while (i < n)
+	{
+		tdst[i] = tsrc[i];
+		if ((char)c == tdst[i])
+			return (void *)&tdst[i + 1];
+		i++;
+	}
+	return (NULL);
 }

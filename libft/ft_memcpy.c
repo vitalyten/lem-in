@@ -1,19 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vtenigin <vtenigin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/13 17:07:00 by vtenigin          #+#    #+#             */
-/*   Updated: 2017/01/13 20:34:22 by vtenigin         ###   ########.fr       */
+/*   Created: 2016/09/23 15:31:41 by vtenigin          #+#    #+#             */
+/*   Updated: 2016/09/26 17:57:55 by vtenigin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem_in.h"
+#include "libft.h"
 
-void		showerr(void)
+void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
-	write(2, "ERROR\n", 6);
-	exit(-1);
+	char	*tdst;
+	char	*tsrc;
+	size_t	i;
+
+	i = 0;
+	tdst = (char *)dst;
+	tsrc = (char *)src;
+	while (i < n)
+	{
+		tdst[i] = tsrc[i];
+		i++;
+	}
+	return ((void *)dst);
 }

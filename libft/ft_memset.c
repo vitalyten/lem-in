@@ -1,19 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vtenigin <vtenigin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/13 17:07:00 by vtenigin          #+#    #+#             */
-/*   Updated: 2017/01/13 20:34:22 by vtenigin         ###   ########.fr       */
+/*   Created: 2016/09/26 16:54:01 by vtenigin          #+#    #+#             */
+/*   Updated: 2016/09/26 18:05:08 by vtenigin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem_in.h"
+#include "libft.h"
 
-void		showerr(void)
+void	*ft_memset(void *b, int c, size_t len)
 {
-	write(2, "ERROR\n", 6);
-	exit(-1);
+	size_t	i;
+	char	*str;
+
+	str = (char *)b;
+	if (len == 0)
+		return (str);
+	i = 0;
+	while (i < len)
+	{
+		str[i] = (char)c;
+		i++;
+	}
+	return (b);
 }

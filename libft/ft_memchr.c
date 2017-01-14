@@ -1,19 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vtenigin <vtenigin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/13 17:07:00 by vtenigin          #+#    #+#             */
-/*   Updated: 2017/01/13 20:34:22 by vtenigin         ###   ########.fr       */
+/*   Created: 2016/09/23 13:23:57 by vtenigin          #+#    #+#             */
+/*   Updated: 2016/09/26 17:56:37 by vtenigin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem_in.h"
+#include "libft.h"
 
-void		showerr(void)
+void	*ft_memchr(const void *s, int c, size_t n)
 {
-	write(2, "ERROR\n", 6);
-	exit(-1);
+	unsigned char *p;
+
+	p = (unsigned char *)s;
+	while (n > 0)
+	{
+		if (*p == (unsigned char)c)
+			return ((void *)p);
+		n--;
+		p++;
+	}
+	return (NULL);
 }

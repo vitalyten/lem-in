@@ -1,19 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strrev.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vtenigin <vtenigin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/13 17:07:00 by vtenigin          #+#    #+#             */
-/*   Updated: 2017/01/13 20:34:22 by vtenigin         ###   ########.fr       */
+/*   Created: 2016/09/30 13:41:02 by vtenigin          #+#    #+#             */
+/*   Updated: 2016/09/30 13:45:30 by vtenigin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem_in.h"
+#include "libft.h"
 
-void		showerr(void)
+char	*ft_strrev(char *str)
 {
-	write(2, "ERROR\n", 6);
-	exit(-1);
+	char	*s1;
+	char	*s2;
+	char	tmp;
+
+	s1 = str;
+	s2 = str + ft_strlen(str) - 1;
+	while (s1 < s2)
+	{
+		tmp = *s1;
+		*s1 = *s2;
+		*s2 = tmp;
+		s1++;
+		s2--;
+	}
+	return (str);
 }

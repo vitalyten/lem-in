@@ -1,19 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vtenigin <vtenigin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/13 17:07:00 by vtenigin          #+#    #+#             */
-/*   Updated: 2017/01/13 20:34:22 by vtenigin         ###   ########.fr       */
+/*   Created: 2016/09/26 18:41:32 by vtenigin          #+#    #+#             */
+/*   Updated: 2016/10/04 21:45:36 by vtenigin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem_in.h"
-
-void		showerr(void)
+void	ft_striteri(char *s, void (*f)(unsigned int, char *))
 {
-	write(2, "ERROR\n", 6);
-	exit(-1);
+	unsigned int i;
+
+	i = 0;
+	if (s && f)
+		while (*s != '\0')
+			f(i++, s++);
 }
