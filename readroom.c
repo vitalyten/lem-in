@@ -6,13 +6,13 @@
 /*   By: vtenigin <vtenigin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/16 18:12:27 by vtenigin          #+#    #+#             */
-/*   Updated: 2017/01/16 18:33:44 by vtenigin         ###   ########.fr       */
+/*   Updated: 2017/01/16 21:28:22 by vtenigin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-t_room	*roomalloc(t_en *env)
+t_room	*roomalloc(t_en *env) // add check for doubles
 {
 	char	**spl;
 	t_room	*room;
@@ -68,7 +68,7 @@ t_room	*readroom(t_en *env)
 			}
 		}
 		ft_printf("%s\n", env->str);
-		free(env->str);
+		ft_strdel(&env->str);
 	}
 	return (first);
 }
