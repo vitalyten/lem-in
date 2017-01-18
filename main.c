@@ -6,7 +6,7 @@
 /*   By: vtenigin <vtenigin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/13 17:07:00 by vtenigin          #+#    #+#             */
-/*   Updated: 2017/01/16 21:25:57 by vtenigin         ###   ########.fr       */
+/*   Updated: 2017/01/17 21:16:18 by vtenigin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,78 +30,60 @@ void	envinit(t_en *env)
 	env->start = 0;
 	env->end = 0;
 	env->nbr = 0;
+	env->dtoe = -1;
 }
 
-void	addlink(t_room *start, char	*r1, char *r2)
+void	checkmap(t_room *room)
+{
+	int	start;
+	int	end;
+
+	start = 0;
+	end = 0;
+	while (room)
+	{
+		if (room->start)
+			start++;
+		if (room->end)
+			end++;
+		room = room->next;
+	}
+	if (start != 1 || end != 1)
+		showerr();
+}
+
+int		dtoerec(int dtoe, t_room *room)
+{
+	t_link	link;
+
+	link = room->link;
+	if (!link || room->end)
+		return ();
+	while ()
+}
+
+void	setdtoe(t_room *start)
 {
 	t_room	*room;
 	t_link	*link;
 
 	room = start;
-	while (ft_strcmp(room->name, r1))
-	{
-		if (room->next)
-			room = room->next;
-		else
-			showerr();
-	}
+	while (!room->start)
+		room = room->next;
+	room->dtoe = 0;
+	if (!room->link)
+		showerr();
 	link = room->link;
 	while (link)
 	{
-		if (!ft_strcmp(link->room->name, r2))
-			showerr();
-		else if (link->next)
-			link = link->next;
-		else
-			break ;
+		link->room->dtoe = 1;
+		link = link->next;
 	}
-	link->next = (t_link *)malloc(sizeof(t_link));
-	link = link->next;
 	room = start;
-	while (room)
-	{
-		if (!ft_strcmp(r2, room->name))
-			break ;
-		else
-			room = room->next;
-	}
-	if (!room)
-		showerr();
-	link->room = room;
+
 }
 
-void	makelink(t_en *env, t_room *room)
-{
-	char	**spl;
-
-	if (env->str[0] != '#' && !ft_strchr(env->str, '-'))
-		showerr();
-	spl = ft_strsplit(env->str, '-');
-	if (spllen(spl) != 2 && env->str[0] != '#')
-		showerr();
-	if (spllen(spl) == 2 && env->str[0] != '#')
-	{
-		addlink(room, spl[0], spl[1]);
-		addlink(room, spl[1], spl[0]);
-	}
-	ft_printf("%s\n", env->str);
-}
-
-void	readlinks(t_en *env, t_room *room)
-{
-	if (env->str)
-	{
-		makelink(env, room);
-		ft_strdel(&env->str);
-	}
-	while (get_next_line(0, &env->str) > 0)
-	{
-		makelink(env, room);
-		ft_strdel(&env->str);
-	}
-}
-
-int	main(void)
+int	main(void) // add check for start and end
 {
 	t_en	env;
 	t_room	*room;
@@ -112,16 +94,17 @@ int	main(void)
 	getnba(&env);
 	room = readroom(&env);
 	readlinks(&env, room);
+	checkmap(room);
 	while (room)
 	{
 		ft_printf("name = %s start = %d end = %d\n",
 			room->name, room->start, room->end);
 		link = room->link;
-		// while (link)
-		// {
-		// 	ft_printf("link : name = %s\n", link->room->name);
-		// 	link = link->next;
-		// }
+		while (link)
+		{
+			ft_printf("link : name = %s\n", link->room->name);
+			link = link->next;
+		}
 		room = room->next;
 	}
 }
