@@ -6,7 +6,7 @@
 /*   By: vtenigin <vtenigin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/13 17:07:00 by vtenigin          #+#    #+#             */
-/*   Updated: 2017/01/17 21:16:18 by vtenigin         ###   ########.fr       */
+/*   Updated: 2017/01/17 21:48:49 by vtenigin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void	envinit(t_en *env)
 	env->start = 0;
 	env->end = 0;
 	env->nbr = 0;
-	env->dtoe = -1;
 }
 
 void	checkmap(t_room *room)
@@ -52,34 +51,43 @@ void	checkmap(t_room *room)
 		showerr();
 }
 
-int		dtoerec(int dtoe, t_room *room)
+void	dtoerec(int dtoe, t_room *room)
 {
-	t_link	link;
+	t_link	*link;
 
 	link = room->link;
-	if (!link || room->end)
-		return ();
-	while ()
+	ft_printf("name %s\n", room->name);
+	if (room->start || (room->dtoe != -1 && room->dtoe < dtoe))
+		return ;
+	if (room->dtoe == -1 || room->dtoe > dtoe)
+		room->dtoe = dtoe;
+	while (link)
+	{
+		dtoerec(dtoe + 1, link->room);
+		link = link->next;
+	}
 }
 
 void	setdtoe(t_room *start)
 {
 	t_room	*room;
-	t_link	*link;
+	// t_link	*link;
 
 	room = start;
-	while (!room->start)
+	while (!room->end)
 		room = room->next;
-	room->dtoe = 0;
+	// ft_printf("name %s\n", room->name);
+	// room->dtoe = 0;
 	if (!room->link)
 		showerr();
-	link = room->link;
-	while (link)
-	{
-		link->room->dtoe = 1;
-		link = link->next;
-	}
-	room = start;
+	dtoerec(0, room);
+	// link = room->link;
+	// while (link)
+	// {
+	// 	link->room->dtoe = 1;
+	// 	link = link->next;
+	// }
+	// room = start;
 
 }
 
@@ -95,10 +103,11 @@ int	main(void) // add check for start and end
 	room = readroom(&env);
 	readlinks(&env, room);
 	checkmap(room);
+	setdtoe(room);
 	while (room)
 	{
-		ft_printf("name = %s start = %d end = %d\n",
-			room->name, room->start, room->end);
+		ft_printf("name = %s start = %d end = %d dtoe = %d\n",
+			room->name, room->start, room->end, room->dtoe);
 		link = room->link;
 		while (link)
 		{
