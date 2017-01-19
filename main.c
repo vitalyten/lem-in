@@ -6,7 +6,7 @@
 /*   By: vtenigin <vtenigin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/13 17:07:00 by vtenigin          #+#    #+#             */
-/*   Updated: 2017/01/18 17:19:53 by vtenigin         ###   ########.fr       */
+/*   Updated: 2017/01/18 18:34:16 by vtenigin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,52 @@ void	checkmap(t_room *room)
 		showerr();
 }
 
+t_room	*findshrt(t_link *link)
+{
+	t_room	*shrt;
 
+	shrt = NULL;
+	while (link)
+	{
+		if (shrt)
+		{
+			if (link->room->dtoe < shrt->dtoe && !link->room->ocup)
+				shrt = link->room;
+		}
+		else
+			if (!link->room->ocup)
+				shrt = link->room;
+		link = link->next;
+	}
+	return (shrt);
+}
 
-int	main(void) // add check for start and end
+void	solve(t_room *room, t_en *env)
+{
+	t_link	*link;
+	t_room	*next;
+	int		i;
+
+	while (!room->start)
+		room = room->next;
+	while (env->nba)
+	{
+		i = 1;
+		while (i <= env->nba)
+		{
+			next = findshrt(room->link);
+			if (next)
+				if ((next->dtoe < room->dtoe && room->dtoe != -1) || room->dtoe == -1)
+					{
+						next->ocup = i;
+						ft_printf("L%d-%s ", i, next->name);
+					}
+		}
+	}
+	next = findshrt(room->link);
+}
+
+int	main(void) // add check start connected to end
 {
 	t_en	env;
 	t_room	*room;

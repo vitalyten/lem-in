@@ -6,7 +6,7 @@
 /*   By: vtenigin <vtenigin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/13 18:39:13 by vtenigin          #+#    #+#             */
-/*   Updated: 2017/01/18 17:20:15 by vtenigin         ###   ########.fr       */
+/*   Updated: 2017/01/18 17:35:39 by vtenigin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef struct	s_room
 	int				start;
 	int				end;
 	int				dtoe;
+	int				ocup;
 }				t_room;
 
 typedef struct	s_link

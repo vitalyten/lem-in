@@ -6,7 +6,7 @@
 /*   By: vtenigin <vtenigin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/16 18:12:27 by vtenigin          #+#    #+#             */
-/*   Updated: 2017/01/17 21:36:30 by vtenigin         ###   ########.fr       */
+/*   Updated: 2017/01/18 17:36:08 by vtenigin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ t_room	*roomalloc(t_en *env) // add check for doubles
 	room->x = ft_atoi(spl[1]);
 	room->y = ft_atoi(spl[2]);
 	room->dtoe = -1;
+	room->ocup = 0;
 	room->next = NULL;
 	room->link = NULL;
 	room->start = (env->start) ? 1 : 0;
