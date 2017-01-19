@@ -6,7 +6,7 @@
 /*   By: vtenigin <vtenigin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/13 18:39:13 by vtenigin          #+#    #+#             */
-/*   Updated: 2017/01/17 17:49:16 by vtenigin         ###   ########.fr       */
+/*   Updated: 2017/01/18 17:20:15 by vtenigin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,7 @@ int				spllen(char **spl);
 void			addlink(t_room *start, char	*r1, char *r2);
 void			makelink(t_en *env, t_room *room);
 void			readlinks(t_en *env, t_room *room);
+void			setdtoe(t_room *start);
+void			dtoerec(int dtoe, t_room *room);
 
 #endif

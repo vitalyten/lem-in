@@ -6,7 +6,7 @@
 /*   By: vtenigin <vtenigin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/13 17:07:00 by vtenigin          #+#    #+#             */
-/*   Updated: 2017/01/17 21:48:49 by vtenigin         ###   ########.fr       */
+/*   Updated: 2017/01/18 17:19:53 by vtenigin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,45 +51,7 @@ void	checkmap(t_room *room)
 		showerr();
 }
 
-void	dtoerec(int dtoe, t_room *room)
-{
-	t_link	*link;
 
-	link = room->link;
-	ft_printf("name %s\n", room->name);
-	if (room->start || (room->dtoe != -1 && room->dtoe < dtoe))
-		return ;
-	if (room->dtoe == -1 || room->dtoe > dtoe)
-		room->dtoe = dtoe;
-	while (link)
-	{
-		dtoerec(dtoe + 1, link->room);
-		link = link->next;
-	}
-}
-
-void	setdtoe(t_room *start)
-{
-	t_room	*room;
-	// t_link	*link;
-
-	room = start;
-	while (!room->end)
-		room = room->next;
-	// ft_printf("name %s\n", room->name);
-	// room->dtoe = 0;
-	if (!room->link)
-		showerr();
-	dtoerec(0, room);
-	// link = room->link;
-	// while (link)
-	// {
-	// 	link->room->dtoe = 1;
-	// 	link = link->next;
-	// }
-	// room = start;
-
-}
 
 int	main(void) // add check for start and end
 {
