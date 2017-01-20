@@ -6,13 +6,13 @@
 #    By: vtenigin <vtenigin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/13 20:30:34 by vtenigin          #+#    #+#              #
-#    Updated: 2017/01/18 17:20:55 by vtenigin         ###   ########.fr        #
+#    Updated: 2017/01/19 17:52:04 by vtenigin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = lem-in
 
-FILES = main.c readroom.c readlink.c dtoe.c
+FILES = main.c readroom.c readlink.c dtoe.c free.c
 
 OBJECTS = $(FILES:.c=.o)
 

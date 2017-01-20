@@ -6,7 +6,7 @@
 /*   By: vtenigin <vtenigin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/13 18:39:13 by vtenigin          #+#    #+#             */
-/*   Updated: 2017/01/18 17:35:39 by vtenigin         ###   ########.fr       */
+/*   Updated: 2017/01/19 17:52:30 by vtenigin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,13 @@ typedef struct	s_link
 	t_room			*room;
 }				t_link;
 
+typedef struct	s_ant
+{
+	int				id;
+	struct s_ant	*next;
+	t_room			*room;
+}				t_ant;
+
 typedef struct	s_en
 {
 	int		nba;
@@ -56,5 +63,7 @@ void			makelink(t_en *env, t_room *room);
 void			readlinks(t_en *env, t_room *room);
 void			setdtoe(t_room *start);
 void			dtoerec(int dtoe, t_room *room);
+void			freeant(t_ant *ant);
+void			freeroom(t_room *room);
 
 #endif

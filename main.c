@@ -6,7 +6,7 @@
 /*   By: vtenigin <vtenigin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/13 17:07:00 by vtenigin          #+#    #+#             */
-/*   Updated: 2017/01/18 18:34:16 by vtenigin         ###   ########.fr       */
+/*   Updated: 2017/01/19 18:49:11 by vtenigin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,56 +51,108 @@ void	checkmap(t_room *room)
 		showerr();
 }
 
-t_room	*findshrt(t_link *link)
+t_room	*findshrt(t_link *start)
 {
 	t_room	*shrt;
+	t_link	*link;
 
+	link = start;
 	shrt = NULL;
 	while (link)
 	{
 		if (shrt)
 		{
-			if (link->room->dtoe < shrt->dtoe && !link->room->ocup)
+			if (link->room->dtoe < shrt->dtoe && !link->room->ocup && !link->room->start)
 				shrt = link->room;
 		}
 		else
-			if (!link->room->ocup)
+		{
+			if (!link->room->ocup && !link->room->start)
 				shrt = link->room;
+		}
 		link = link->next;
 	}
 	return (shrt);
 }
 
-void	solve(t_room *room, t_en *env)
+void	solve(t_en *env, t_ant *first)
 {
-	t_link	*link;
-	t_room	*next;
+	t_room	*room;
+	t_ant	*ant;
+	// int		i;
+
+	// i = 0;
+	while (env->nba > 0)// && ++i < 10)
+	{
+		// ant = first;
+		// while (ant)
+		// {
+		// 	ft_printf("ant %d room %s\n", ant->id, ant->room->name);
+		// 	ant = ant->next;
+		// }
+		ant = first;
+		while (ant)
+		{
+			if (!ant->room->end)
+			{
+				room = findshrt(ant->room->link);
+				// ft_printf("ant %d room %s\n", ant->id, ant->room->name);
+				// if (room)
+				// 	ft_printf("name %s\n", room->name);
+				// else
+				// 	ft_printf("null\n");
+				if (room)
+					if ((room->dtoe < ant->room->dtoe && !room->start) || ant->room->start)
+					{
+						if (!room->end)
+							room->ocup = ant->id;
+						ant->room->ocup = 0;
+						ant->room = room;
+						ft_printf("L%d-%s ", ant->id, room->name);
+						if (room->end)
+							env->nba--;
+					}
+			}
+			ant = ant->next;
+		}
+		ft_printf("\n");
+	}
+}
+
+t_ant	*antalloc(t_en *env, t_room *room)
+{
 	int		i;
+	t_ant	*ant;
+	t_ant	*first;
 
 	while (!room->start)
 		room = room->next;
-	while (env->nba)
+	i = 1;
+	ant = (t_ant *)malloc(sizeof(t_ant));
+	first = ant;
+	ant->next = NULL;
+	ant->id = 1;
+	ant->room = room;
+	while (++i <= env->nba)
 	{
-		i = 1;
-		while (i <= env->nba)
-		{
-			next = findshrt(room->link);
-			if (next)
-				if ((next->dtoe < room->dtoe && room->dtoe != -1) || room->dtoe == -1)
-					{
-						next->ocup = i;
-						ft_printf("L%d-%s ", i, next->name);
-					}
-		}
+		ant->next = (t_ant *)malloc(sizeof(t_ant));
+		ant = ant->next;
+		ant->next = NULL;
+		ant->id = i;
+		ant->room = room;
 	}
-	next = findshrt(room->link);
+	return (first);
 }
+
+
 
 int	main(void) // add check start connected to end
 {
 	t_en	env;
 	t_room	*room;
+	t_room	*start;
 	t_link	*link;
+	t_ant	*ant;
 
 	room = NULL;
 	envinit(&env);
@@ -109,6 +161,13 @@ int	main(void) // add check start connected to end
 	readlinks(&env, room);
 	checkmap(room);
 	setdtoe(room);
+	ant = antalloc(&env, room);
+	// while (ant)
+	// {
+	// 	ft_printf("id = %d room = %s\n", ant->id, ant->room->name);
+	// 	ant = ant->next;
+	// }
+	start = room;
 	while (room)
 	{
 		ft_printf("name = %s start = %d end = %d dtoe = %d\n",
@@ -121,6 +180,9 @@ int	main(void) // add check start connected to end
 		}
 		room = room->next;
 	}
+	solve(&env, ant);
+	freeroom(start);
+	freeant(ant);
 }
 
 void		showerr(void)
