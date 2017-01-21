@@ -6,7 +6,7 @@
 /*   By: vtenigin <vtenigin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/16 18:12:27 by vtenigin          #+#    #+#             */
-/*   Updated: 2017/01/20 19:26:38 by vtenigin         ###   ########.fr       */
+/*   Updated: 2017/01/20 19:37:43 by vtenigin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,14 @@ t_room	*roomalloc(t_en *env)
 	return (room);
 }
 
+void	setsten(t_en *env)
+{
+	if (!ft_strcmp(env->str, "##start"))
+		env->start = 1;
+	if (!ft_strcmp(env->str, "##end"))
+		env->end = 1;
+}
+
 t_room	*readroom(t_en *env)
 {
 	t_room	*room;
@@ -50,22 +58,16 @@ t_room	*readroom(t_en *env)
 			showerr();
 		if (env->str[0] != '#' && !ft_strchr(env->str, ' '))
 			break ;
-		if (!ft_strcmp(env->str, "##start"))
-			env->start = 1;
-		if (!ft_strcmp(env->str, "##end"))
-			env->end = 1;
-		if (env->str[0] != '#')
+		setsten(env);
+		if (env->str[0] != '#' && !room)
 		{
-			if (!room)
-			{
-				room = roomalloc(env);
-				first = room;
-			}
-			else
-			{
-				room->next = roomalloc(env);
-				room = room->next;
-			}
+			room = roomalloc(env);
+			first = room;
+		}
+		else if (env->str[0] != '#')
+		{
+			room->next = roomalloc(env);
+			room = room->next;
 		}
 		ft_printf("%s\n", env->str);
 		ft_strdel(&env->str);

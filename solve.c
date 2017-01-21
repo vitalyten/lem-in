@@ -6,7 +6,7 @@
 /*   By: vtenigin <vtenigin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/20 17:59:57 by vtenigin          #+#    #+#             */
-/*   Updated: 2017/01/20 18:02:03 by vtenigin         ###   ########.fr       */
+/*   Updated: 2017/01/20 19:54:49 by vtenigin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,13 @@ void	solve(t_en *env, t_ant *first)
 			{
 				room = findshrt(ant->room->link);
 				if (room)
-					if ((room->dtoe < ant->room->dtoe && !room->start) || ant->room->start)
+					if ((room->dtoe < ant->room->dtoe && !room->start)
+						|| ant->room->start)
 					{
-						if (!room->end)
-							room->ocup = ant->id;
 						ant->room->ocup = 0;
 						ant->room = room;
 						ft_printf("L%d-%s ", ant->id, room->name);
-						if (room->end)
-							env->nba--;
+						(room->end) ? (env->nba--) : (room->ocup = ant->id);
 					}
 			}
 			ant = ant->next;
@@ -54,7 +52,8 @@ t_room	*findshrt(t_link *start)
 	{
 		if (shrt)
 		{
-			if (link->room->dtoe < shrt->dtoe && !link->room->ocup && !link->room->start)
+			if (link->room->dtoe < shrt->dtoe
+				&& !link->room->ocup && !link->room->start)
 				shrt = link->room;
 		}
 		else
