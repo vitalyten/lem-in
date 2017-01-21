@@ -6,7 +6,7 @@
 /*   By: vtenigin <vtenigin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/17 17:47:23 by vtenigin          #+#    #+#             */
-/*   Updated: 2017/01/20 19:11:27 by vtenigin         ###   ########.fr       */
+/*   Updated: 2017/01/20 20:07:11 by vtenigin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ void	makelink(t_en *env, t_room *room)
 		addlink(room, spl[1], spl[0]);
 	}
 	ft_printf("%s\n", env->str);
+	free2d(spl);
 }
 
 void	readlinks(t_en *env, t_room *room)
