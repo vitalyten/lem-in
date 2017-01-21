@@ -6,7 +6,7 @@
 /*   By: vtenigin <vtenigin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/13 18:39:13 by vtenigin          #+#    #+#             */
-/*   Updated: 2017/01/20 18:01:13 by vtenigin         ###   ########.fr       */
+/*   Updated: 2017/01/20 19:13:49 by vtenigin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,5 +72,8 @@ void			isconnected(t_room *room);
 void			checkmap(t_room *room);
 void			solve(t_en *env, t_ant *first);
 t_room			*findshrt(t_link *start);
+t_room			*findroom(t_room *room, char *name);
+t_link			*linkalloc(t_room *room);
+t_ant			*antalloc(t_en *env, t_room *room);
 
 #endif

@@ -6,13 +6,13 @@
 /*   By: vtenigin <vtenigin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/16 18:12:27 by vtenigin          #+#    #+#             */
-/*   Updated: 2017/01/19 20:33:03 by vtenigin         ###   ########.fr       */
+/*   Updated: 2017/01/20 19:26:38 by vtenigin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-t_room	*roomalloc(t_en *env) // add check for doubles
+t_room	*roomalloc(t_en *env)
 {
 	char	**spl;
 	t_room	*room;
@@ -42,9 +42,8 @@ t_room	*readroom(t_en *env)
 {
 	t_room	*room;
 	t_room	*first;
-	int		i;
 
-	i = 0;
+	room = NULL;
 	while (get_next_line(0, &env->str) > 0)
 	{
 		if (env->str[0] == 'L')
@@ -55,15 +54,18 @@ t_room	*readroom(t_en *env)
 			env->start = 1;
 		if (!ft_strcmp(env->str, "##end"))
 			env->end = 1;
-		if (env->str[0] != '#' && i++ == 0)
+		if (env->str[0] != '#')
 		{
-			room = roomalloc(env);
-			first = room;
-		}
-		else if (env->str[0] != '#')
-		{
-			room->next = roomalloc(env);
-			room = room->next;
+			if (!room)
+			{
+				room = roomalloc(env);
+				first = room;
+			}
+			else
+			{
+				room->next = roomalloc(env);
+				room = room->next;
+			}
 		}
 		ft_printf("%s\n", env->str);
 		ft_strdel(&env->str);

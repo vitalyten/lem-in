@@ -6,29 +6,45 @@
 /*   By: vtenigin <vtenigin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/17 17:47:23 by vtenigin          #+#    #+#             */
-/*   Updated: 2017/01/19 20:00:46 by vtenigin         ###   ########.fr       */
+/*   Updated: 2017/01/20 19:11:27 by vtenigin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-void	addlink(t_room *start, char	*r1, char *r2)
+t_link	*linkalloc(t_room *room)
 {
-	t_room	*room;
-	t_link	*link;
+	t_link *link;
 
-	room = start;
-	link = NULL;
-	while (ft_strcmp(room->name, r1))
+	link = (t_link *)malloc(sizeof(t_link));
+	link->next = NULL;
+	link->room = room;
+	return (link);
+}
+
+t_room	*findroom(t_room *room, char *name)
+{
+	while (ft_strcmp(room->name, name))
 	{
-		if (room->next)
-			room = room->next;
-		else
+		room = room->next;
+		if (!room)
 			showerr();
 	}
-	if (room->link)
+	return (room);
+}
+
+void	addlink(t_room *start, char *r1, char *r2)
+{
+	t_room	*room1;
+	t_room	*room2;
+	t_link	*link;
+
+	link = NULL;
+	room1 = findroom(start, r1);
+	room2 = findroom(start, r2);
+	if (room1->link)
 	{
-		link = room->link;
+		link = room1->link;
 		while (link)
 		{
 			if (!ft_strcmp(link->room->name, r2))
@@ -40,28 +56,9 @@ void	addlink(t_room *start, char	*r1, char *r2)
 		}
 	}
 	if (link)
-	{
-		link->next = (t_link *)malloc(sizeof(t_link));
-		link = link->next;
-		link->next = NULL;
-	}
+		link->next = linkalloc(room2);
 	else
-	{
-		room->link = (t_link *)malloc(sizeof(t_link));
-		link = room->link;
-		link->next = NULL;
-	}
-	room = start;
-	while (room)
-	{
-		if (!ft_strcmp(r2, room->name))
-			break ;
-		else
-			room = room->next;
-	}
-	if (!room)
-		showerr();
-	link->room = room;
+		room1->link = linkalloc(room2);
 }
 
 void	makelink(t_en *env, t_room *room)
