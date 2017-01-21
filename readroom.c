@@ -6,7 +6,7 @@
 /*   By: vtenigin <vtenigin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/16 18:12:27 by vtenigin          #+#    #+#             */
-/*   Updated: 2017/01/18 17:36:08 by vtenigin         ###   ########.fr       */
+/*   Updated: 2017/01/19 20:33:03 by vtenigin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ t_room	*roomalloc(t_en *env) // add check for doubles
 		showerr();
 	if (!ft_isnumber(spl[1]) || !ft_isnumber(spl[2]))
 		showerr();
-	// ft_printf("%s\n", spl[0]);
 	room = (t_room *)malloc(sizeof(t_room));
 	room->name = ft_strdup(spl[0]);
 	room->x = ft_atoi(spl[1]);
@@ -56,18 +55,15 @@ t_room	*readroom(t_en *env)
 			env->start = 1;
 		if (!ft_strcmp(env->str, "##end"))
 			env->end = 1;
-		if (env->str[0] != '#')
+		if (env->str[0] != '#' && i++ == 0)
 		{
-			if (i++ == 0)
-			{
-				room = roomalloc(env);
-				first = room;
-			}
-			else
-			{
-				room->next = roomalloc(env);
-				room = room->next;
-			}
+			room = roomalloc(env);
+			first = room;
+		}
+		else if (env->str[0] != '#')
+		{
+			room->next = roomalloc(env);
+			room = room->next;
 		}
 		ft_printf("%s\n", env->str);
 		ft_strdel(&env->str);

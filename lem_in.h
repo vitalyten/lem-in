@@ -6,7 +6,7 @@
 /*   By: vtenigin <vtenigin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/13 18:39:13 by vtenigin          #+#    #+#             */
-/*   Updated: 2017/01/19 17:52:30 by vtenigin         ###   ########.fr       */
+/*   Updated: 2017/01/20 18:01:13 by vtenigin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,5 +65,12 @@ void			setdtoe(t_room *start);
 void			dtoerec(int dtoe, t_room *room);
 void			freeant(t_ant *ant);
 void			freeroom(t_room *room);
+int				ft_isnumber(char *n);
+void			showerr(void);
+void			checkdouble(t_room *start);
+void			isconnected(t_room *room);
+void			checkmap(t_room *room);
+void			solve(t_en *env, t_ant *first);
+t_room			*findshrt(t_link *start);
 
 #endif

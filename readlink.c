@@ -6,7 +6,7 @@
 /*   By: vtenigin <vtenigin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/17 17:47:23 by vtenigin          #+#    #+#             */
-/*   Updated: 2017/01/17 17:48:26 by vtenigin         ###   ########.fr       */
+/*   Updated: 2017/01/19 20:00:46 by vtenigin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,13 @@ void	addlink(t_room *start, char	*r1, char *r2)
 
 	room = start;
 	link = NULL;
-	// ft_printf("name = %s r1 = %s r2 = %s\n", room->name, r1, r2);
-	// ft_printf("cmp %d\n", ft_strcmp(room->name, r1));
 	while (ft_strcmp(room->name, r1))
 	{
 		if (room->next)
 			room = room->next;
 		else
 			showerr();
-		// ft_printf("test %s\n", room->name);
 	}
-	// ft_printf("link %s\n", room->link);
 	if (room->link)
 	{
 		link = room->link;
@@ -55,9 +51,7 @@ void	addlink(t_room *start, char	*r1, char *r2)
 		link = room->link;
 		link->next = NULL;
 	}
-	// ft_printf("test2\n");
 	room = start;
-	// ft_printf("test3\n");
 	while (room)
 	{
 		if (!ft_strcmp(r2, room->name))
@@ -99,4 +93,5 @@ void	readlinks(t_en *env, t_room *room)
 		makelink(env, room);
 		ft_strdel(&env->str);
 	}
+	ft_printf("\n");
 }
