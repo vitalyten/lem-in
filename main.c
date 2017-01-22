@@ -6,14 +6,16 @@
 /*   By: vtenigin <vtenigin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/13 17:07:00 by vtenigin          #+#    #+#             */
-/*   Updated: 2017/01/20 18:03:26 by vtenigin         ###   ########.fr       */
+/*   Updated: 2017/01/21 17:47:55 by vtenigin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-void	getnba(t_en *env)
+void		getnba(t_en *env)
 {
+	long long l;
+
 	if (get_next_line(0, &env->str) < 1)
 		showerr();
 	while (!ft_isnumber(env->str))
@@ -25,21 +27,22 @@ void	getnba(t_en *env)
 		if (get_next_line(0, &env->str) < 1)
 			showerr();
 	}
-	env->nba = ft_atoi(env->str);
-	if (env->nba < 1)
+	l = ft_atoll(env->str);
+	if (l > 2147483647 || l < 1)
 		showerr();
+	env->nba = (int)l;
 	ft_printf("%d\n", env->nba);
 	ft_strdel(&env->str);
 }
 
-void	envinit(t_en *env)
+void		envinit(t_en *env)
 {
 	env->start = 0;
 	env->end = 0;
 	env->nbr = 0;
 }
 
-t_ant	*antalloc(t_en *env, t_room *room)
+t_ant		*antalloc(t_en *env, t_room *room)
 {
 	int		i;
 	t_ant	*ant;
@@ -64,7 +67,7 @@ t_ant	*antalloc(t_en *env, t_room *room)
 	return (first);
 }
 
-int		main(void)
+int			main(void)
 {
 	t_en	env;
 	t_room	*room;
@@ -83,4 +86,28 @@ int		main(void)
 	solve(&env, ant);
 	freeroom(room);
 	freeant(ant);
+}
+
+long long	ft_atoll(const char *str)
+{
+	long long	res;
+	long long	sign;
+
+	res = 0;
+	sign = 1;
+	while (ft_iswhitespace(*str))
+		str++;
+	if (*str == '-')
+	{
+		sign = -1;
+		str++;
+	}
+	else if (*str == '+')
+		str++;
+	while (ft_isdigit(*str))
+	{
+		res = res * 10 + *str - '0';
+		str++;
+	}
+	return (sign * res);
 }

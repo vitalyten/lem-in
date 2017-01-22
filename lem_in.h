@@ -6,7 +6,7 @@
 /*   By: vtenigin <vtenigin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/13 18:39:13 by vtenigin          #+#    #+#             */
-/*   Updated: 2017/01/20 19:13:49 by vtenigin         ###   ########.fr       */
+/*   Updated: 2017/01/21 17:18:23 by vtenigin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,6 @@ t_room			*findshrt(t_link *start);
 t_room			*findroom(t_room *room, char *name);
 t_link			*linkalloc(t_room *room);
 t_ant			*antalloc(t_en *env, t_room *room);
+long long		ft_atoll(const char *str);
 
 #endif

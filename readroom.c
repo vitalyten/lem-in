@@ -6,7 +6,7 @@
 /*   By: vtenigin <vtenigin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/16 18:12:27 by vtenigin          #+#    #+#             */
-/*   Updated: 2017/01/20 19:37:43 by vtenigin         ###   ########.fr       */
+/*   Updated: 2017/01/21 17:42:08 by vtenigin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,21 @@
 
 t_room	*roomalloc(t_en *env)
 {
-	char	**spl;
-	t_room	*room;
+	char		**spl;
+	t_room		*room;
+	long long	l;
 
 	spl = ft_strsplit(env->str, ' ');
-	if (spllen(spl) != 3)
-		showerr();
-	if (!ft_isnumber(spl[1]) || !ft_isnumber(spl[2]))
-		showerr();
+	(spllen(spl) != 3) ? showerr() : 0;
+	(!ft_isnumber(spl[1]) || !ft_isnumber(spl[2])) ? showerr() : 0;
 	room = (t_room *)malloc(sizeof(t_room));
 	room->name = ft_strdup(spl[0]);
-	room->x = ft_atoi(spl[1]);
-	room->y = ft_atoi(spl[2]);
+	l = ft_atoll(spl[1]);
+	(l > 2147483647 || l < -2147483648) ? showerr() : 0;
+	room->x = (int)l;
+	l = ft_atoll(spl[2]);
+	(l > 2147483647 || l < -2147483648) ? showerr() : 0;
+	room->y = (int)l;
 	room->dtoe = -1;
 	room->ocup = 0;
 	room->next = NULL;
