@@ -6,7 +6,7 @@
 /*   By: vtenigin <vtenigin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/17 17:47:23 by vtenigin          #+#    #+#             */
-/*   Updated: 2017/01/20 20:07:11 by vtenigin         ###   ########.fr       */
+/*   Updated: 2017/01/23 19:56:09 by vtenigin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ t_link	*linkalloc(t_room *room)
 	link = (t_link *)malloc(sizeof(t_link));
 	link->next = NULL;
 	link->room = room;
+	link->used = 0;
 	return (link);
 }
 

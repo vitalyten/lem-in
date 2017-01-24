@@ -6,7 +6,7 @@
 /*   By: vtenigin <vtenigin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/13 17:07:00 by vtenigin          #+#    #+#             */
-/*   Updated: 2017/01/21 17:47:55 by vtenigin         ###   ########.fr       */
+/*   Updated: 2017/01/23 20:10:17 by vtenigin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void		getnba(t_en *env)
 	if (l > 2147483647 || l < 1)
 		showerr();
 	env->nba = (int)l;
+	env->nbant = (int)l;
 	ft_printf("%d\n", env->nba);
 	ft_strdel(&env->str);
 }
@@ -39,7 +40,6 @@ void		envinit(t_en *env)
 {
 	env->start = 0;
 	env->end = 0;
-	env->nbr = 0;
 }
 
 t_ant		*antalloc(t_en *env, t_room *room)
@@ -71,19 +71,29 @@ int			main(void)
 {
 	t_en	env;
 	t_room	*room;
+	t_room	*tmp;
 	t_ant	*ant;
 
 	room = NULL;
 	envinit(&env);
 	getnba(&env);
 	room = readroom(&env);
+	if (!room)
+		showerr();
 	readlinks(&env, room);
 	checkmap(room);
 	setdtoe(room);
 	isconnected(room);
 	checkdouble(room);
 	ant = antalloc(&env, room);
-	solve(&env, ant);
+	tmp = room;
+	while (tmp)
+	{
+		ft_printf("room %s dtoe %d\n", tmp->name, tmp->dtoe);
+		tmp = tmp->next;
+	}
+	ft_printf("\n");
+	solve(&env, ant, room);
 	freeroom(room);
 	freeant(ant);
 }

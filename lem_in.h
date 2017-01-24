@@ -6,7 +6,7 @@
 /*   By: vtenigin <vtenigin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/13 18:39:13 by vtenigin          #+#    #+#             */
-/*   Updated: 2017/01/21 17:18:23 by vtenigin         ###   ########.fr       */
+/*   Updated: 2017/01/23 20:10:39 by vtenigin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct	s_link
 {
 	struct s_link	*next;
 	t_room			*room;
+	int				used;
 }				t_link;
 
 typedef struct	s_ant
@@ -44,7 +45,7 @@ typedef struct	s_ant
 typedef struct	s_en
 {
 	int		nba;
-	int		nbr;
+	int		nbant;
 	int		start;
 	int		end;
 	char	*str;
@@ -70,8 +71,8 @@ void			showerr(void);
 void			checkdouble(t_room *start);
 void			isconnected(t_room *room);
 void			checkmap(t_room *room);
-void			solve(t_en *env, t_ant *first);
-t_room			*findshrt(t_link *start);
+void			solve(t_en *env, t_ant *first, t_room *room);
+t_link			*findshrt(t_ant *ant, t_en *env);
 t_room			*findroom(t_room *room, char *name);
 t_link			*linkalloc(t_room *room);
 t_ant			*antalloc(t_en *env, t_room *room);
