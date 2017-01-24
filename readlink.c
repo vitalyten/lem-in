@@ -6,7 +6,7 @@
 /*   By: vtenigin <vtenigin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/17 17:47:23 by vtenigin          #+#    #+#             */
-/*   Updated: 2017/01/23 19:56:09 by vtenigin         ###   ########.fr       */
+/*   Updated: 2017/01/23 20:49:29 by vtenigin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	addlink(t_room *start, char *r1, char *r2)
 		while (link)
 		{
 			if (!ft_strcmp(link->room->name, r2))
-				showerr();
+				return ;
 			else if (link->next)
 				link = link->next;
 			else

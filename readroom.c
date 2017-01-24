@@ -6,7 +6,7 @@
 /*   By: vtenigin <vtenigin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/16 18:12:27 by vtenigin          #+#    #+#             */
-/*   Updated: 2017/01/23 19:44:52 by vtenigin         ###   ########.fr       */
+/*   Updated: 2017/01/23 20:53:30 by vtenigin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,7 @@ t_room	*readroom(t_en *env)
 	first = NULL;
 	while (get_next_line(0, &env->str) > 0)
 	{
-		if (env->str[0] == 'L')
-			showerr();
+		(env->str[0] == 'L') ? showerr() : 0;
 		if (env->str[0] != '#' && !ft_strchr(env->str, ' '))
 			break ;
 		setsten(env);

@@ -6,11 +6,27 @@
 /*   By: vtenigin <vtenigin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/13 17:07:00 by vtenigin          #+#    #+#             */
-/*   Updated: 2017/01/23 20:10:17 by vtenigin         ###   ########.fr       */
+/*   Updated: 2017/01/23 21:23:53 by vtenigin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
+
+void		resetlink(t_room *room)
+{
+	t_link *link;
+
+	while (room)
+	{
+		link = room->link;
+		while (link)
+		{
+			link->used = 0;
+			link = link->next;
+		}
+		room = room->next;
+	}
+}
 
 void		getnba(t_en *env)
 {
@@ -34,12 +50,6 @@ void		getnba(t_en *env)
 	env->nbant = (int)l;
 	ft_printf("%d\n", env->nba);
 	ft_strdel(&env->str);
-}
-
-void		envinit(t_en *env)
-{
-	env->start = 0;
-	env->end = 0;
 }
 
 t_ant		*antalloc(t_en *env, t_room *room)
@@ -71,11 +81,9 @@ int			main(void)
 {
 	t_en	env;
 	t_room	*room;
-	t_room	*tmp;
 	t_ant	*ant;
 
 	room = NULL;
-	envinit(&env);
 	getnba(&env);
 	room = readroom(&env);
 	if (!room)
@@ -86,13 +94,6 @@ int			main(void)
 	isconnected(room);
 	checkdouble(room);
 	ant = antalloc(&env, room);
-	tmp = room;
-	while (tmp)
-	{
-		ft_printf("room %s dtoe %d\n", tmp->name, tmp->dtoe);
-		tmp = tmp->next;
-	}
-	ft_printf("\n");
 	solve(&env, ant, room);
 	freeroom(room);
 	freeant(ant);
